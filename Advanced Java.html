@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced Java — Multithreading & Performance</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { font-size: 0.9rem; color: #ccc; }
+
+    .container { display: flex; height: calc(100vh - 60px); flex-wrap: wrap; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #444; }
+
+    /* Content */
+    .content { flex: 1; padding: 20px; overflow-y: auto; min-width: 0; }
+    .topic { display: none; flex-direction: column; gap: 15px; }
+    .topic.active { display: flex; }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Advanced Java — Multithreading & Performance</h1>
+    <p>Learn how threads improve speed and efficiency</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('threadclass')">Thread Class</a></li>
+        <li><a href="#" onclick="showTopic('runnable')">Runnable Interface</a></li>
+        <li><a href="#" onclick="showTopic('lifecycle')">Thread Lifecycle</a></li>
+        <li><a href="#" onclick="showTopic('sync')">Synchronization</a></li>
+        <li><a href="#" onclick="showTopic('performance')">Performance Test</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+      <!-- Thread Class -->
+      <div id="threadclass" class="topic active">
+        <div class="code-block">
+class MyThread extends Thread {
+    public void run() {
+        // Code inside run() executes in a new thread
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Thread running: " + i);
+        }
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread(); // create thread
+        t1.start(); // start thread (calls run())
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Thread Class</h3>
+          <p>- Extend <code>Thread</code> and override <code>run()</code>.<br>
+          - Use <code>start()</code> to begin execution in a separate thread.</p>
+          <div class="output">
+Thread running: 1<br>
+Thread running: 2<br>
+Thread running: 3<br>
+Thread running: 4<br>
+Thread running: 5
+          </div>
+        </div>
+      </div>
+
+      <!-- Runnable -->
+      <div id="runnable" class="topic">
+        <div class="code-block">
+class MyTask implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("Runnable task: " + i);
+        }
+    }
+}
+
+public class RunnableExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyTask()); // pass runnable
+        t1.start();
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Runnable Interface</h3>
+          <p>- Implement <code>Runnable</code> and pass it to a <code>Thread</code>.<br>
+          - Preferred for multiple inheritance flexibility.</p>
+          <div class="output">
+Runnable task: 1<br>
+Runnable task: 2<br>
+Runnable task: 3
+          </div>
+        </div>
+      </div>
+
+      <!-- Thread Lifecycle -->
+      <div id="lifecycle" class="topic">
+        <div class="code-block">
+public class LifecycleExample {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            System.out.println("Thread is running...");
+        });
+
+        System.out.println("Thread created (NEW)");
+        t.start(); // moves to RUNNABLE
+        t.join();  // waits for thread to finish
+        System.out.println("Thread finished (TERMINATED)");
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Thread Lifecycle</h3>
+          <p>- NEW → RUNNABLE → RUNNING → TERMINATED.<br>
+          - <code>join()</code> waits until the thread completes.</p>
+          <div class="output">
+Thread created (NEW)<br>
+Thread is running...<br>
+Thread finished (TERMINATED)
+          </div>
+        </div>
+      </div>
+
+      <!-- Synchronization -->
+      <div id="sync" class="topic">
+        <div class="code-block">
+class Counter {
+    int count = 0;
+
+    // synchronized prevents data conflict
+    public synchronized void increment() {
+        count++;
+    }
+}
+
+public class SyncExample {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) c.increment();
+        });
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) c.increment();
+        });
+
+        t1.start(); t2.start();
+        t1.join(); t2.join();
+
+        System.out.println("Final count: " + c.count);
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Synchronization</h3>
+          <p>- Without <code>synchronized</code>, threads may overwrite each other’s data.<br>
+          - Synchronization ensures one thread updates at a time.</p>
+          <div class="output">
+Final count: 2000
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance -->
+      <div id="performance" class="topic">
+        <div class="code-block">
+public class PerformanceTest {
+    public static void main(String[] args) throws InterruptedException {
+        long start, end;
+
+        // Single-threaded
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1e7; i++); // work
+        end = System.currentTimeMillis();
+        System.out.println("Single-thread time: " + (end - start) + "ms");
+
+        // Multi-threaded
+        Runnable task = () -> { for (int i = 0; i < 5e6; i++); };
+
+        Thread t1 = new Thread(task);
+        Thread t2 = new Thread(task);
+
+        start = System.currentTimeMillis();
+        t1.start(); t2.start();
+        t1.join(); t2.join();
+        end = System.currentTimeMillis();
+
+        System.out.println("Multi-thread time: " + (end - start) + "ms");
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Performance</h3>
+          <p>- Threads split work across CPU cores.<br>
+          - Usually faster, but depends on task type and system resources.</p>
+          <div class="output">
+Single-thread time: 40ms<br>
+Multi-thread time: 25ms
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+     function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

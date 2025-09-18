@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C++ Basics — Variables, Functions & Pointers</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { font-size: 0.9rem; color: #ccc; }
+
+    .container { display: flex; height: calc(100vh - 60px); flex-wrap: wrap; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #444; }
+
+    /* Content */
+    .content { flex: 1; padding: 20px; overflow-y: auto; min-width: 0; }
+    .topic { display: none; flex-direction: column; gap: 15px; }
+    .topic.active { display: flex; }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>C++ Basics — Variables, Functions & Pointers</h1>
+    <p>Learn step by step with examples</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('variables')">Variables</a></li>
+        <li><a href="#" onclick="showTopic('functions')">Functions</a></li>
+        <li><a href="#" onclick="showTopic('pointers')">Pointers</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+      <!-- Variables -->
+      <div id="variables" class="topic active">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int age = 20;
+    double gpa = 1.75;
+    char grade = 'A';
+    string name = "Alice";
+
+    cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "Age: " &lt;&lt; age &lt;&lt; endl;
+    cout &lt;&lt; "GPA: " &lt;&lt; gpa &lt;&lt; endl;
+    cout &lt;&lt; "Grade: " &lt;&lt; grade &lt;&lt; endl;
+
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Variables</h3>
+          <p>Variables are used to store data in C++:</p>
+          <ul>
+            <li><b>int</b> → whole numbers (e.g., 20)</li>
+            <li><b>double</b> → decimal numbers (e.g., 1.75)</li>
+            <li><b>char</b> → single character (e.g., 'A')</li>
+            <li><b>string</b> → text (e.g., "Alice")</li>
+          </ul>
+          <div class="output">
+Name: Alice<br>
+Age: 20<br>
+GPA: 1.75<br>
+Grade: A
+          </div>
+        </div>
+      </div>
+
+      <!-- Functions -->
+      <div id="functions" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+int addNumbers(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int sum = addNumbers(5, 10);
+    cout &lt;&lt; "Sum: " &lt;&lt; sum &lt;&lt; endl;
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Functions</h3>
+          <p>Functions are reusable blocks of code that perform a task. In this example:</p>
+          <ul>
+            <li><code>addNumbers(int a, int b)</code> → takes two integers and returns their sum</li>
+            <li>Main program calls the function and prints the result</li>
+          </ul>
+          <div class="output">
+Sum: 15
+          </div>
+        </div>
+      </div>
+
+      <!-- Pointers -->
+      <div id="pointers" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num = 42;
+    int *ptr = &amp;num;
+
+    cout &lt;&lt; "Value of num: " &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; "Address of num: " &lt;&lt; &amp;num &lt;&lt; endl;
+    cout &lt;&lt; "Pointer stores: " &lt;&lt; ptr &lt;&lt; endl;
+    cout &lt;&lt; "Value via pointer: " &lt;&lt; *ptr &lt;&lt; endl;
+
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Pointers</h3>
+          <p>Pointers are variables that store memory addresses:</p>
+          <ul>
+            <li><code>&amp;</code> → gives the address of a variable</li>
+            <li><code>*</code> → gets the value stored at the address (dereference)</li>
+          </ul>
+          <div class="output">
+Value of num: 42<br>
+Address of num: 0x7ffeefbff4a8<br>
+Pointer stores: 0x7ffeefbff4a8<br>
+Value via pointer: 42
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

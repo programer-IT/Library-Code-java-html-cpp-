@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Java Basics — Syntax & Fundamentals</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { font-size: 0.9rem; color: #ccc; }
+
+    .container { display: flex; height: calc(100vh - 60px); flex-wrap: wrap; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #444; }
+
+    /* Content */
+    .content { flex: 1; padding: 20px; overflow-y: auto; min-width: 0; }
+    .topic { display: none; flex-direction: column; gap: 15px; }
+    .topic.active { display: flex; }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .container { flex-direction: column; height: auto; }
+      .sidebar { width: 100%; height: auto; padding: 15px; }
+      .content { padding: 15px; }
+      .topic.active { flex-direction: column; }
+      .code-block, .explanation, .output { width: 100% !important; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      header p { font-size: 0.8rem; }
+      .sidebar h2 { font-size: 1rem; }
+      .sidebar a { font-size: 0.9rem; padding: 6px; }
+      .code-block, .explanation, .output { font-size: 13px; padding: 10px; }
+      body { font-size: 14px; line-height: 1.4; }
+    }
+
+    @media (max-width: 400px) {
+      .container { padding: 10px; margin: 10px; }
+      header h1 { font-size: 1.1rem; }
+      header p { font-size: 0.75rem; }
+      .sidebar a { font-size: 0.85rem; }
+      li { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Java Basics — Syntax & Fundamentals</h1>
+    <p>Learn step by step with examples</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('print')">Print & Println</a></li>
+        <li><a href="#" onclick="showTopic('variables')">Variables</a></li>
+        <li><a href="#" onclick="showTopic('input')">User Input</a></li>
+        <li><a href="#" onclick="showTopic('ifelse')">If-Else</a></li>
+        <li><a href="#" onclick="showTopic('switch')">Switch-Case</a></li>
+        <li><a href="#" onclick="showTopic('loops')">Loops</a></li>
+        <li><a href="#" onclick="showTopic('arrays')">Arrays</a></li>
+        <li><a href="#" onclick="showTopic('methods')">Methods</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Print & Println -->
+      <div id="print" class="topic active">
+        <div class="code-block">
+public class PrintExample {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        System.out.print("This is ");
+        System.out.print("on the same line.");
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            <code>System.out.println()</code> prints text and moves the cursor to the next line,
+            while <code>System.out.print()</code> prints text but keeps the cursor on the same line.
+            That’s why "Hello, World!" is on one line, and "This is on the same line." continues without breaking.
+          </p>
+          <div class="output">
+Hello, World!<br>
+This is on the same line.
+          </div>
+        </div>
+      </div>
+
+      <!-- Variables -->
+      <div id="variables" class="topic">
+        <div class="code-block">
+public class VariablesExample {
+    public static void main(String[] args) {
+        int age = 20;
+        double gpa = 1.75;
+        String name = "Alice";
+        boolean isStudent = true;
+
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("GPA: " + gpa);
+        System.out.println("Is a student? " + isStudent);
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            Variables store data. <code>int</code> is for whole numbers, <code>double</code> is for decimals,
+            <code>String</code> is for text, and <code>boolean</code> is for true/false values.
+            Printing them shows the stored values.
+          </p>
+          <div class="output">
+Name: Alice<br>
+Age: 20<br>
+GPA: 1.75<br>
+Is a student? true
+          </div>
+        </div>
+      </div>
+
+      <!-- User Input -->
+      <div id="input" class="topic">
+        <div class="code-block">
+import java.util.Scanner;
+
+public class InputExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        System.out.println("Hello, " + name + "!");
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            To read user input, we use <code>Scanner</code>. 
+            <code>nextLine()</code> reads a full line of text typed by the user.
+            Here, the name entered is combined with a greeting using string concatenation.
+          </p>
+          <div class="output">
+Enter your name: <br>
+Hello, Alice!
+          </div>
+        </div>
+      </div>
+
+      <!-- If-Else -->
+      <div id="ifelse" class="topic">
+        <div class="code-block">
+public class IfElseExample {
+    public static void main(String[] args) {
+        int score = 85;
+
+        if(score >= 90) {
+            System.out.println("Excellent!");
+        } else if(score >= 75) {
+            System.out.println("Good job!");
+        } else {
+            System.out.println("Keep trying!");
+        }
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            The <code>if-else</code> statement allows decision making.
+            If the first condition (<code>score >= 90</code>) is not true, the program checks the next one.
+            Since 85 is greater than 75, "Good job!" is printed.
+          </p>
+          <div class="output">
+Good job!
+          </div>
+        </div>
+      </div>
+
+      <!-- Switch -->
+      <div id="switch" class="topic">
+        <div class="code-block">
+public class SwitchExample {
+    public static void main(String[] args) {
+        int day = 3;
+
+        switch(day) {
+            case 1: System.out.println("Monday"); break;
+            case 2: System.out.println("Tuesday"); break;
+            case 3: System.out.println("Wednesday"); break;
+            default: System.out.println("Other day");
+        }
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            A <code>switch</code> is used when one variable is compared against many possible values.
+            Here, <code>day</code> is 3, so the case <code>3</code> runs and prints "Wednesday".
+            The <code>break</code> statement stops the switch after a match.
+          </p>
+          <div class="output">
+Wednesday
+          </div>
+        </div>
+      </div>
+
+      <!-- Loops -->
+      <div id="loops" class="topic">
+        <div class="code-block">
+public class LoopExample {
+    public static void main(String[] args) {
+        for(int i=1; i<=3; i++) {
+            System.out.println("Count: " + i);
+        }
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            A <code>for</code> loop repeats code a fixed number of times.
+            Here, <code>i</code> starts at 1, increases by 1 each time, and stops when it becomes greater than 3.
+          </p>
+          <div class="output">
+Count: 1<br>
+Count: 2<br>
+Count: 3
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrays -->
+      <div id="arrays" class="topic">
+        <div class="code-block">
+public class ArrayExample {
+    public static void main(String[] args) {
+        String[] fruits = {"Apple", "Banana", "Cherry"};
+        for(String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            An <code>array</code> stores multiple values in one variable.
+            The <code>for-each</code> loop is used to go through each element in the array automatically.
+          </p>
+          <div class="output">
+Apple<br>
+Banana<br>
+Cherry
+          </div>
+        </div>
+      </div>
+
+      <!-- Methods -->
+      <div id="methods" class="topic">
+        <div class="code-block">
+public class MethodExample {
+    static int square(int n) {
+        return n * n;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Square of 5: " + square(5));
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Explanation</h3>
+          <p>
+            A <code>method</code> is a block of code that can be reused.
+            The method <code>square()</code> takes a number, multiplies it by itself, and returns the result.
+            Methods make code cleaner and reusable.
+          </p>
+          <div class="output">
+Square of 5: 25
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

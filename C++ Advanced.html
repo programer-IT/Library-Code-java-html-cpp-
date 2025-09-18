@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C++ Advanced — Templates & Memory Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    h1 { margin: 0; }
+
+    .container { display: flex; height: 100vh; }
+    .sidebar {
+      width: 260px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .sidebar a:hover { background: #444; }
+
+    .content { flex: 1; padding: 20px; overflow-y: auto; }
+    .topic { display: none; }
+    .topic.active { display: flex; gap: 20px; }
+
+    .code-block {
+      flex: 1;
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>C++ Advanced — Templates & Memory Management</h1>
+    <p>Deep dive with examples</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('function-template')">Function Templates</a></li>
+        <li><a href="#" onclick="showTopic('class-template')">Class Templates</a></li>
+        <li><a href="#" onclick="showTopic('template-specialization')">Template Specialization</a></li>
+        <li><a href="#" onclick="showTopic('unique-ptr')">Smart Pointers (unique_ptr)</a></li>
+        <li><a href="#" onclick="showTopic('shared-ptr')">Smart Pointers (shared_ptr)</a></li>
+        <li><a href="#" onclick="showTopic('manual-memory')">Manual Memory (new & delete)</a></li>
+        <li><a href="#" onclick="showTopic('move-semantics')">Move Semantics</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+      <!-- Function Template -->
+      <div id="function-template" class="topic active">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Function template for finding maximum of two values
+template &lt;typename T&gt;
+T getMax(T a, T b) {
+    return (a &gt; b) ? a : b;
+}
+
+int main() {
+    cout &lt;&lt; "Max int: " &lt;&lt; getMax(10, 20) &lt;&lt; endl;
+    cout &lt;&lt; "Max double: " &lt;&lt; getMax(5.5, 2.3) &lt;&lt; endl;
+    cout &lt;&lt; "Max char: " &lt;&lt; getMax('A', 'Z') &lt;&lt; endl;
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Function Templates</h3>
+          <p>Templates allow functions to work with any data type without rewriting code.</p>
+          <div class="output">
+Max int: 20<br>
+Max double: 5.5<br>
+Max char: Z
+          </div>
+        </div>
+      </div>
+
+      <!-- Class Template -->
+      <div id="class-template" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Class template for a simple Pair
+template &lt;class T1, class T2&gt;
+class Pair {
+    T1 first;
+    T2 second;
+public:
+    Pair(T1 f, T2 s) : first(f), second(s) {}
+    void display() {
+        cout &lt;&lt; "First: " &lt;&lt; first &lt;&lt; ", Second: " &lt;&lt; second &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Pair&lt;int, double&gt; p1(10, 20.5);
+    Pair&lt;string, char&gt; p2("Hello", 'A');
+
+    p1.display();
+    p2.display();
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Class Templates</h3>
+          <p>Class templates allow creating flexible data structures or classes that handle different data types.</p>
+          <div class="output">
+First: 10, Second: 20.5<br>
+First: Hello, Second: A
+          </div>
+        </div>
+      </div>
+
+      <!-- Template Specialization -->
+      <div id="template-specialization" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Generic template
+template &lt;class T&gt;
+class Printer {
+public:
+    void print(T value) {
+        cout &lt;&lt; "Generic print: " &lt;&lt; value &lt;&lt; endl;
+    }
+};
+
+// Specialization for char*
+template &lt;&gt;
+class Printer&lt;char*&gt; {
+public:
+    void print(char* value) {
+        cout &lt;&lt; "Specialized print for char*: " &lt;&lt; value &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Printer&lt;int&gt; p1;
+    Printer&lt;char*&gt; p2;
+
+    p1.print(123);
+    p2.print("Hello Templates!");
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Template Specialization</h3>
+          <p>Specialization lets us provide a custom implementation of a template for a specific type.</p>
+          <div class="output">
+Generic print: 123<br>
+Specialized print for char*: Hello Templates!
+          </div>
+        </div>
+      </div>
+
+      <!-- Smart Pointer: unique_ptr -->
+      <div id="unique-ptr" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    unique_ptr&lt;int&gt; p1(new int(42));
+
+    cout &lt;&lt; "Value: " &lt;&lt; *p1 &lt;&lt; endl;
+
+    // Transfer ownership
+    unique_ptr&lt;int&gt; p2 = move(p1);
+
+    if (!p1) cout &lt;&lt; "p1 is null now" &lt;&lt; endl;
+    cout &lt;&lt; "p2 value: " &lt;&lt; *p2 &lt;&lt; endl;
+
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Smart Pointers (unique_ptr)</h3>
+          <p><code>unique_ptr</code> owns a resource exclusively. It automatically deletes the object when it goes out of scope.</p>
+          <div class="output">
+Value: 42<br>
+p1 is null now<br>
+p2 value: 42
+          </div>
+        </div>
+      </div>
+
+      <!-- Smart Pointer: shared_ptr -->
+      <div id="shared-ptr" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(100);
+    shared_ptr&lt;int&gt; p2 = p1; // Shared ownership
+
+    cout &lt;&lt; "p1 value: " &lt;&lt; *p1 &lt;&lt; endl;
+    cout &lt;&lt; "p2 value: " &lt;&lt; *p2 &lt;&lt; endl;
+
+    cout &lt;&lt; "Use count: " &lt;&lt; p1.use_count() &lt;&lt; endl;
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Smart Pointers (shared_ptr)</h3>
+          <p><code>shared_ptr</code> allows multiple pointers to share ownership of an object. The object is deleted only when all shared_ptr owners are gone.</p>
+          <div class="output">
+p1 value: 100<br>
+p2 value: 100<br>
+Use count: 2
+          </div>
+        </div>
+      </div>
+
+      <!-- Manual Memory -->
+      <div id="manual-memory" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Allocate memory dynamically
+    int* p = new int(55);
+    cout &lt;&lt; "Value: " &lt;&lt; *p &lt;&lt; endl;
+
+    // Free memory
+    delete p;
+
+    // Allocate array
+    int* arr = new int[3]{1, 2, 3};
+    for (int i = 0; i &lt; 3; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+
+    delete[] arr; // Free array
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Manual Memory (new & delete)</h3>
+          <p><code>new</code> allocates memory on the heap. <code>delete</code> frees it to avoid memory leaks.</p>
+          <div class="output">
+Value: 55<br>
+1 2 3
+          </div>
+        </div>
+      </div>
+
+      <!-- Move Semantics -->
+      <div id="move-semantics" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v1 = {1, 2, 3, 4, 5};
+
+    cout &lt;&lt; "Before move, v1 size: " &lt;&lt; v1.size() &lt;&lt; endl;
+
+    // Move v1 into v2 (transfer ownership of resources)
+    vector&lt;int&gt; v2 = move(v1);
+
+    cout &lt;&lt; "After move, v1 size: " &lt;&lt; v1.size() &lt;&lt; endl;
+    cout &lt;&lt; "v2 size: " &lt;&lt; v2.size() &lt;&lt; endl;
+
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>Move Semantics</h3>
+          <p><b>move()</b> transfers ownership of resources instead of copying, which improves performance for large objects.</p>
+          <div class="output">
+Before move, v1 size: 5<br>
+After move, v1 size: 0<br>
+v2 size: 5
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

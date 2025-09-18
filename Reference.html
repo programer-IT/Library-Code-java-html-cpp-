@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Master Reference — Java · C++ · HTML (Complete)</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0b74f0;
+      --item:#eef2ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#0f172a;
+      line-height:1.45;
+      padding:18px;
+    }
+    header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    header h1{margin:0;font-size:1.5rem}
+    header p{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      gap:18px;
+      grid-template-columns: 1fr;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      box-shadow: 0 6px 18px rgba(12, 22, 52, 0.06);
+    }
+
+    /* nav */
+    .nav {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-bottom:8px;
+    }
+    .nav a{
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      background:#eef2ff;
+      color:var(--accent);
+      font-weight:600;
+      font-size:0.95rem;
+    }
+
+    /* details styling */
+    details{margin:10px 0;background:var(--item);border-radius:8px;padding:10px}
+    summary{font-weight:700;cursor:pointer;outline:none}
+    .section-inner{padding:10px 4px 4px 4px}
+
+    /* lists */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:12px;
+    }
+    ul { list-style:none; padding:0; margin:0; }
+    li{
+      background:#fff;
+      border-radius:8px;
+      padding:10px;
+      margin:6px 0;
+      font-size:0.95rem;
+      box-shadow: 0 2px 8px rgba(12,22,52,0.04);
+    }
+    li strong{color:var(--accent)}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:0.92rem}
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Master Reference — Java · C++ · HTML (Complete)</h1>
+    <p>Comprehensive keywords, literals, operators, punctuation, and constructs — responsive & collapsible.</p>
+  </header>
+
+  <div class="wrap">
+
+    <div class="card">
+      <nav class="nav">
+        <a href="#java">Java</a>
+        <a href="#cpp">C++</a>
+        <a href="#html">HTML</a>
+        <a href="index.html">Back</a>
+      </nav>
+
+      <details open id="java">
+        <summary>Java — Keywords · Literals · Operators · Symbols · Constructs (Complete)</summary>
+
+        <div class="section-inner">
+          <div class="grid">
+
+            <div>
+              <h3>Reserved Keywords (classic & modern)</h3>
+              <ul>
+                <li><strong>Keywords:</strong> abstract, assert, boolean, break, byte, case, catch, char, class, const (reserved), continue, default, do, double, else, enum, extends, final, finally, float, for, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while.</li>
+                <li><strong>Modern / Module / Pattern / Records:</strong> module, open, opens, requires, exports, transitive, provides, uses, to, var, yield, record, sealed, permits, non-sealed.</li>
+              </ul>
+
+              <h3>Data Types & Literals</h3>
+              <ul>
+                <li><strong>Primitive types:</strong> byte, short, int, long, float, double, char, boolean.</li>
+                <li><strong>Literals:</strong> integers (e.g., <code>0</code>, <code>42</code>), floats (<code>3.14</code>), char (<code>'a'</code>), string (<code>"text"</code>), boolean (<code>true</code>, <code>false</code>), <code>null</code>.</li>
+                <li><strong>Numeric suffixes:</strong> <code>L</code> for long, <code>F</code> for float, binary/octal/hex literals (e.g., <code>0b1010</code>, <code>0xFF</code>), underscores in numeric literals (<code>1_000_000</code>).</li>
+              </ul>
+
+              <h3>Operators</h3>
+              <ul>
+                <li><strong>Arithmetic:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>.</li>
+                <li><strong>Relational:</strong> <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>.</li>
+                <li><strong>Logical:</strong> <code>&&</code>, <code>||</code>, <code>!</code>.</li>
+                <li><strong>Assignment:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, and bitwise assignment variants.</li>
+                <li><strong>Increment / Decrement:</strong> <code>++</code>, <code>--</code> (pre & post).</li>
+                <li><strong>Bitwise:</strong> <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>~</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code>.</li>
+                <li><strong>Ternary:</strong> <code>? :</code> (e.g., <code>x = (a &gt; b) ? a : b;</code>).</li>
+                <li><strong>Other:</strong> <code>instanceof</code>, method reference <code>::</code>, lambda arrow <code>-></code>.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Control Flow & Statements</h3>
+              <ul>
+                <li><strong>Flow:</strong> <code>if</code>, <code>else</code>, <code>switch</code>, <code>case</code>, <code>default</code>, <code>for</code>, enhanced-for (<code>for(Type x : arr)</code>), <code>while</code>, <code>do...while</code>.</li>
+                <li><strong>Flow control:</strong> <code>break</code>, <code>continue</code>, <code>return</code> (e.g., <code>return 0;</code> inside <code>main</code>), <code>throw</code>.</li>
+              </ul>
+
+              <h3>OOP / Classes / Interfaces</h3>
+              <ul>
+                <li><strong>Declaration:</strong> <code>class</code>, <code>interface</code>, <code>enum</code>, <code>record</code>.</li>
+                <li><strong>Inheritance / Implementation:</strong> <code>extends</code>, <code>implements</code>.</li>
+                <li><strong>Access / Modifiers:</strong> <code>public</code>, <code>protected</code>, <code>private</code>, <code>static</code>, <code>final</code>, <code>abstract</code>, <code>synchronized</code>, <code>volatile</code>, <code>transient</code>, <code>strictfp</code>.</li>
+                <li><strong>Object ops:</strong> <code>new</code>, <code>this</code>, <code>super</code>, <code>instanceof</code>.</li>
+              </ul>
+
+              <h3>Exceptions & Concurrency</h3>
+              <ul>
+                <li><strong>Exceptions:</strong> <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throws</code>, <code>throw</code>, <code>assert</code>.</li>
+                <li><strong>Concurrency / Threads:</strong> <code>synchronized</code>, <code>volatile</code>, <code>Thread</code> API; high-level concurrency APIs (Executors, ForkJoin) are library-level.</li>
+              </ul>
+
+              <h3>Misc / Build & Organization</h3>
+              <ul>
+                <li><strong>Packages & modules:</strong> <code>package</code>, <code>import</code>, <code>module</code>, <code>requires</code>, <code>exports</code>, <code>opens</code>, <code>provides</code>, <code>uses</code>, <code>to</code>, <code>transitive</code>.</li>
+                <li><strong>Compilation-time:</strong> <code>native</code> (native methods), <code>strictfp</code>, <code>transient</code>, <code>volatile</code>.</li>
+                <li><strong>Examples / syntax snippets:</strong>
+                  <ul>
+                    <li><code>public static void main(String[] args) { ... }</code></li>
+                    <li><code>return 0;</code> (common pattern in C-style; Java main returning int is only via <code>System.exit(int)</code> or in older patterns when main signature used int)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </details>
+
+      <details id="cpp">
+        <summary>C++ — Keywords · Operators · Symbols · Constructs (Complete)</summary>
+        <div class="section-inner">
+          <div class="grid">
+
+            <div>
+              <h3>Core Keywords (classic & modern)</h3>
+              <ul>
+                <li><strong>Types & control:</strong> asm, auto, bool, break, case, catch, char, class, const, consteval, constinit, constexpr, continue, default, delete, do, double, else, enum, explicit, export (rare), extern, float, for, friend, goto, if, inline, int, long, mutable, namespace, new, noexcept, nullptr, operator, private, protected, public, register (deprecated), reinterpret_cast (operator form), return, short, signed, sizeof, static, static_assert, static_cast, struct, switch, template, this, throw, try, typedef, typeid, union, unsigned, using, virtual, void, volatile, while.</li>
+                <li><strong>Modern concurrency / coroutines / modules:</strong> thread_local, concept, requires, co_await, co_yield, co_return, module, import, export (module), using (alias).</li>
+              </ul>
+
+              <h3>Data Types & Literals</h3>
+              <ul>
+                <li><strong>Fundamental:</strong> <code>int</code>, <code>short</code>, <code>long</code>, <code>char</code>, <code>wchar_t</code>, <code>char16_t</code>, <code>char32_t</code>, <code>float</code>, <code>double</code>, <code>long double</code>, <code>bool</code>, <code>void</code>.</li>
+                <li><strong>Literals:</strong> integer, floating, char (<code>'a'</code>), string (<code>"..."</code>), boolean (<code>true</code>, <code>false</code>), pointer literal <code>nullptr</code>, user-defined literals.</li>
+              </ul>
+
+              <h3>Operators</h3>
+              <ul>
+                <li><strong>Arithmetic:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>.</li>
+                <li><strong>Relational:</strong> <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>.</li>
+                <li><strong>Logical:</strong> <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>.</li>
+                <li><strong>Bitwise:</strong> <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>~</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>.</li>
+                <li><strong>Assignment:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, bitwise assignment variants.</li>
+                <li><strong>Increment/Decrement:</strong> <code>++</code>, <code>--</code>.</li>
+                <li><strong>Pointer / member:</strong> <code>*</code> (dereference), <code>&amp;</code> (address-of), <code>-></code>, <code>.</code>.</li>
+                <li><strong>Scope:</strong> <code>::</code> (scope resolution, e.g., <code>std::cout</code>).</li>
+                <li><strong>Ternary:</strong> <code>? :</code>.</li>
+                <li><strong>Cast operators:</strong> <code>static_cast</code>, <code>dynamic_cast</code>, <code>const_cast</code>, <code>reinterpret_cast</code>.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Punctuation & Structure</h3>
+              <ul>
+                <li><strong>Statement terminator:</strong> <code>;</code></li>
+                <li><strong>Block:</strong> <code>{ }</code></li>
+                <li><strong>Parentheses:</strong> <code>( )</code> for calls/expressions</li>
+                <li><strong>Brackets:</strong> <code>[ ]</code> for arrays</li>
+                <li><strong>Comma:</strong> <code>,</code> separates expressions/parameters</li>
+                <li><strong>Colon:</strong> <code>:</code> (labels, inheritance: <code>class B : public A</code>)</li>
+              </ul>
+
+              <h3>Preprocessor & Build</h3>
+              <ul>
+                <li><strong>Preprocessor directives:</strong> <code>#include</code>, <code>#define</code>, <code>#undef</code>, <code>#ifdef</code>, <code>#ifndef</code>, <code>#if</code>, <code>#else</code>, <code>#elif</code>, <code>#endif</code>, <code>#pragma</code>.</li>
+                <li><strong>Linkage/extern:</strong> <code>extern "C"</code>, <code>extern</code>.</li>
+              </ul>
+
+              <h3>OOP / Memory / Templates</h3>
+              <ul>
+                <li><strong>OOP:</strong> <code>class</code>, <code>struct</code>, <code>union</code>, <code>public/private/protected</code>, <code>virtual</code>, <code>override</code> (specifier), <code>final</code> (specifier).</li>
+                <li><strong>Memory:</strong> <code>new</code>, <code>delete</code>, <code>malloc/free</code> (C API), smart pointers (<code>std::unique_ptr</code>, <code>std::shared_ptr</code> — library-level), <code>sizeof</code>.</li>
+                <li><strong>Templates:</strong> <code>template</code>, <code>typename</code>, concepts (<code>concept</code>), <code>using</code> alias templates.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </details>
+
+      <details id="html">
+        <summary>HTML — Elements · Attributes · Entities · Comments (Complete)</summary>
+        <div class="section-inner">
+          <div class="grid">
+
+            <div>
+              <h3>Document & Metadata</h3>
+              <ul>
+                <li><strong>&lt;!DOCTYPE&gt;</strong> — Document type declaration (HTML5).</li>
+                <li><strong>&lt;html&gt;</strong> — Root element.</li>
+                <li><strong>&lt;head&gt;</strong> — Metadata container.</li>
+                <li><strong>&lt;title&gt;</strong> — Page title.</li>
+                <li><strong>&lt;meta&gt;</strong> — Metadata: charset, viewport, description, keywords.</li>
+                <li><strong>&lt;base&gt;</strong> — Base URL for relative links.</li>
+                <li><strong>&lt;link&gt;</strong> — External resources (CSS, icons).</li>
+                <li><strong>&lt;style&gt;</strong> — Inline CSS.</li>
+                <li><strong>&lt;script&gt;</strong> — JS code or external script file.</li>
+                <li><strong>&lt;noscript&gt;</strong> — Fallback if JS disabled.</li>
+                <li><strong>&lt;template&gt;</strong> — Client-side template not rendered until used.</li>
+              </ul>
+
+              <h3>Sections & Semantics</h3>
+              <ul>
+                <li><strong>&lt;body&gt;</strong> — Main content.</li>
+                <li><strong>&lt;header&gt;</strong> — Intro / nav area.</li>
+                <li><strong>&lt;nav&gt;</strong> — Navigation links.</li>
+                <li><strong>&lt;main&gt;</strong> — Primary unique content.</li>
+                <li><strong>&lt;section&gt;</strong> — Thematic grouping.</li>
+                <li><strong>&lt;article&gt;</strong> — Independent content piece.</li>
+                <li><strong>&lt;aside&gt;</strong> — Sidebar/related content.</li>
+                <li><strong>&lt;footer&gt;</strong> — Footer information.</li>
+                <li><strong>&lt;address&gt;</strong> — Contact information.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Text, Inline & Grouping</h3>
+              <ul>
+                <li><strong>&lt;h1&gt; ... &lt;h6&gt;</strong> — Headings from important to least.</li>
+                <li><strong>&lt;p&gt;</strong> — Paragraphs.</li>
+                <li><strong>&lt;div&gt;</strong> — Generic block container.</li>
+                <li><strong>&lt;span&gt;</strong> — Inline container.</li>
+                <li><strong>&lt;a&gt;</strong> — Anchor / link (<code>href</code>).</li>
+                <li><strong>&lt;img&gt;</strong> — Image (<code>src, alt, srcset</code>).</li>
+                <li><strong>&lt;picture&gt;</strong> &amp; <strong>&lt;source&gt;</strong> — Responsive images.</li>
+                <li><strong>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</strong> — Lists.</li>
+                <li><strong>&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;, &lt;th&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;</strong> — Tables.</li>
+                <li><strong>&lt;form&gt;</strong> and controls: <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code>, <code>&lt;datalist&gt;</code>, <code>&lt;output&gt;</code>.</li>
+              </ul>
+
+              <h3>Media & Graphics</h3>
+              <ul>
+                <li><strong>&lt;audio&gt;</strong>, <strong>&lt;video&gt;</strong> — multimedia playback with <code>&lt;source&gt;</code> &amp; <code>&lt;track&gt;</code> for captions.</li>
+                <li><strong>&lt;canvas&gt;</strong> — scriptable bitmap drawing.</li>
+                <li><strong>&lt;svg&gt;</strong> — Scalable Vector Graphics inline.</li>
+                <li><strong>&lt;iframe&gt;</strong> — Embed another HTML document.</li>
+                <li><strong>&lt;object&gt;</strong>, <strong>&lt;embed&gt;</strong> — External content (plugins/objects).</li>
+              </ul>
+
+              <h3>Text semantics & other inline tags</h3>
+              <ul>
+                <li><strong>&lt;strong&gt;</strong>, <strong>&lt;em&gt;</strong>, <strong>&lt;b&gt;</strong>, <strong>&lt;i&gt;</strong>, <strong>&lt;small&gt;</strong>, <strong>&lt;mark&gt;</strong>, <strong>&lt;del&gt;</strong>, <strong>&lt;ins&gt;</strong>, <strong>&lt;code&gt;</strong>, <strong>&lt;kbd&gt;</strong>, <strong>&lt;samp&gt;</strong>, <strong>&lt;var&gt;</strong>, <strong>&lt;cite&gt;</strong>, <strong>&lt;q&gt;</strong>, <strong>&lt;blockquote&gt;</strong>.</li>
+                <li><strong>Comments:</strong> <code>&lt;!-- comment --&gt;</code></li>
+                <li><strong>Entities & encoding:</strong> <code>&amp;nbsp;</code>, <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code> and <code>&lt;meta charset="utf-8"&gt;</code>.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="card" style="text-align:center;font-size:0.95rem;color:var(--muted)">
+      Tip: use the navigation links above or collapse/expand sections. You can copy any block to create separate pages (Java / C++ / HTML) if you want printable references.
+    </div>
+
+  </div>
+</body>
+</html>

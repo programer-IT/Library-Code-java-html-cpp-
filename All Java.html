@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Java — Basics, OOP & Advanced (All-in-One)</title>
+  <style>
+    :root {
+      --sidebar-bg: #333;
+      --header-bg: #222;
+      --code-bg: #1e1e1e;
+      --explain-bg: #fff;
+      --output-bg: #000;
+    }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: var(--header-bg); color: #fff; padding: 14px 16px; text-align: center; }
+    header p { margin: 6px 0 0 0; font-size: 14px; color: #ddd; }
+
+    .container { display: flex; height: calc(100vh - 72px); } /* header height considered */
+    .sidebar {
+      width: 260px;
+      background: var(--sidebar-bg);
+      color: #fff;
+      padding: 18px;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .sidebar h2 { font-size: 16px; margin-top: 0; color: #fff; }
+    .sidebar .section-title { margin-top: 14px; color: #ddd; font-weight: bold; font-size: 13px; }
+    .sidebar ul { list-style: none; padding: 0; margin: 6px 0 20px 0; }
+    .sidebar li { margin: 6px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .sidebar a:hover { background: #444; }
+    .sidebar a.active { background: #444; }
+
+    .content { flex: 1; padding: 20px; overflow-y: auto; box-sizing: border-box; }
+    .topic { display: none; }
+    .topic.active { display: block; }
+
+    .panel {
+      display: flex;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .code-block {
+      width: 55%;
+      background: var(--code-bg);
+      color: #dcdcdc;
+      padding: 16px;
+      border-radius: 8px;
+      overflow: auto;
+      white-space: pre;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      box-sizing: border-box;
+    }
+
+    .right {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .explanation {
+      background: var(--explain-bg);
+      padding: 14px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      min-height: 160px;
+    }
+
+    .output {
+      background: var(--output-bg);
+      color: #0f0;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+
+    h3 { margin-top: 0; }
+    small.note { color: #666; display:block; margin-top:8px; }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Java — Basics · OOP · Advanced</h1>
+    <p>All-in-one study page: click a topic on the left to view code, explanation, and sample output.</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <h2>Contents</h2>
+
+      <div class="section-title">Java Basics</div>
+      <ul>
+        <li><a href="#" data-target="basics-print" class="active">Print & Println</a></li>
+        <li><a href="#" data-target="basics-variables">Variables & Data Types</a></li>
+        <li><a href="#" data-target="basics-input">User Input (Scanner)</a></li>
+        <li><a href="#" data-target="basics-ifelse">If - Else If - Else</a></li>
+        <li><a href="#" data-target="basics-switch">Switch - Case</a></li>
+        <li><a href="#" data-target="basics-loops">Loops (for, while, do-while)</a></li>
+        <li><a href="#" data-target="basics-arrays">Arrays (1D, 2D & 3D)</a></li>
+        <li><a href="#" data-target="basics-methods">Methods (Functions)</a></li>
+      </ul>
+
+      <div class="section-title">Java OOP</div>
+      <ul>
+        <li><a href="#" data-target="oop-classes">Classes & Objects</a></li>
+        <li><a href="#" data-target="oop-constructors">Constructors</a></li>
+        <li><a href="#" data-target="oop-encapsulation">Encapsulation (get/set)</a></li>
+        <li><a href="#" data-target="oop-inheritance">Inheritance</a></li>
+        <li><a href="#" data-target="oop-overriding">Method Overriding</a></li>
+        <li><a href="#" data-target="oop-polymorphism">Polymorphism</a></li>
+      </ul>
+
+      <div class="section-title">Advanced Java</div>
+      <ul>
+        <li><a href="#" data-target="adv-thread-class">Thread (extends Thread)</a></li>
+        <li><a href="#" data-target="adv-runnable">Runnable (implements Runnable)</a></li>
+        <li><a href="#" data-target="adv-sync">Synchronization (synchronized)</a></li>
+        <li><a href="#" data-target="adv-sleep-join">Sleep & Join</a></li>
+        <li><a href="#" data-target="adv-performance">Simple Performance Tip</a></li>
+      </ul>
+
+      <div style="margin-top:18px;">
+        <a href="index.html" style="color:#fff; text-decoration:none; font-size:13px;">← Back to Library Home</a>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- ================ Java Basics ================== -->
+
+      <!-- Print -->
+      <section id="basics-print" class="topic active">
+        <h3>Print & Println</h3>
+        <div class="panel">
+          <div class="code-block">
+// Print vs println example
+public class PrintExample {
+    public static void main(String[] args) {
+        // println prints text then moves to a new line
+        System.out.println("Hello, World!");
+
+        // print prints text but stays on the same line
+        System.out.print("This is ");
+        System.out.print("on the same line.");
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation (how it runs)</strong>
+              <ul>
+                <li>JVM starts at <code>main</code> and executes statements top to bottom.</li>
+                <li><code>System.out.println()</code> prints the argument then appends a newline character.</li>
+                <li><code>System.out.print()</code> prints without adding a newline, so subsequent prints continue on the same line.</li>
+              </ul>
+              <small class="note">Compile: <code>javac PrintExample.java</code> → Run: <code>java PrintExample</code></small>
+            </div>
+
+            <div class="output">
+Hello, World!
+This is on the same line.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Variables -->
+      <section id="basics-variables" class="topic">
+        <h3>Variables & Data Types</h3>
+        <div class="panel">
+          <div class="code-block">
+public class VariablesExample {
+    public static void main(String[] args) {
+        int age = 20;              // integer
+        double gpa = 1.75;         // floating point
+        String name = "Alice";     // text
+        boolean isStudent = true;  // true/false
+
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("GPA: " + gpa);
+        System.out.println("Is a student? " + isStudent);
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Variables store values in memory; the type determines allowed values and operations.</li>
+                <li><code>String</code> is an object for text; using <code>+</code> concatenates strings.</li>
+                <li>Java is statically typed: types are declared and checked at compile time.</li>
+              </ul>
+              <small class="note">Compile & run as usual. No input needed.</small>
+            </div>
+
+            <div class="output">
+Name: Alice
+Age: 20
+GPA: 1.75
+Is a student? true
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Input -->
+      <section id="basics-input" class="topic">
+        <h3>User Input (Scanner)</h3>
+        <div class="panel">
+          <div class="code-block">
+import java.util.Scanner;
+
+public class InputExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);        // create Scanner
+
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();                // read full line
+
+        System.out.print("Enter your age: ");
+        int age = sc.nextInt();                     // read integer
+
+        System.out.println("Hello " + name + ", you are " + age + " years old.");
+
+        sc.close(); // close scanner to free system resources
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>Scanner</code> reads from <code>System.in</code> (keyboard).</li>
+                <li><code>nextLine()</code> reads an entire line; <code>nextInt()</code> reads an integer token.</li>
+                <li>Careful mixing <code>nextInt()</code> and <code>nextLine()</code> — you may need to consume the newline.</li>
+              </ul>
+              <small class="note">Example run: type inputs when prompted.</small>
+            </div>
+
+            <div class="output">
+Enter your name: Alice
+Enter your age: 20
+Hello Alice, you are 20 years old.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- If-Else -->
+      <section id="basics-ifelse" class="topic">
+        <h3>If - Else If - Else</h3>
+        <div class="panel">
+          <div class="code-block">
+import java.util.Scanner;
+
+public class IfElseExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter grade (0-100): ");
+        int grade = sc.nextInt();
+
+        if (grade >= 90) {
+            System.out.println("Excellent");
+        } else if (grade >= 75) {
+            System.out.println("Passed");
+        } else {
+            System.out.println("Failed");
+        }
+        sc.close();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Control flow chooses which block runs based on conditions.</li>
+                <li>Conditions are evaluated top to bottom; the first true branch runs.</li>
+                <li>Use <code>else if</code> for multiple disjoint ranges.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Enter grade (0-100): 82
+Passed
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Switch -->
+      <section id="basics-switch" class="topic">
+        <h3>Switch - Case</h3>
+        <div class="panel">
+          <div class="code-block">
+import java.util.Scanner;
+
+public class SwitchExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Choose (1-3): ");
+        int c = sc.nextInt();
+
+        switch (c) {
+            case 1:
+                System.out.println("One");
+                break;
+            case 2:
+                System.out.println("Two");
+                break;
+            case 3:
+                System.out.println("Three");
+                break;
+            default:
+                System.out.println("Out of range");
+        }
+        sc.close();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>switch</code> matches a value to <code>case</code> labels.</li>
+                <li>Remember to use <code>break</code> to prevent fall-through.</li>
+                <li>Works with integer types, strings (since Java 7), enums, etc.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Choose (1-3): 2
+Two
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loops -->
+      <section id="basics-loops" class="topic">
+        <h3>Loops (for, while, do-while)</h3>
+        <div class="panel">
+          <div class="code-block">
+public class LoopsExample {
+    public static void main(String[] args) {
+        // for loop
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("For: " + i);
+        }
+
+        // while loop
+        int j = 1;
+        while (j <= 2) {
+            System.out.println("While: " + j);
+            j++;
+        }
+
+        // do-while
+        int k = 1;
+        do {
+            System.out.println("DoWhile: " + k);
+            k++;
+        } while (k <= 2);
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>for</code> is preferred when you know iteration count.</li>
+                <li><code>while</code> checks condition before the loop body.</li>
+                <li><code>do-while</code> runs the body at least once then checks the condition.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+For: 1
+For: 2
+For: 3
+While: 1
+While: 2
+DoWhile: 1
+DoWhile: 2
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Arrays -->
+      <section id="basics-arrays" class="topic">
+  <h3>Arrays (1D, 2D & 3D, Dynamic)</h3>
+  <div class="panel">
+    <div class="code-block">
+// 1D Array
+String[] fruits = {"Apple", "Banana", "Mango"};
+for (int i = 0; i < fruits.length; i++) {
+    System.out.println("Fruit " + (i+1) + ": " + fruits[i]);
+}
+
+// 2D Array
+int[][] matrix = {{1,2,3}, {4,5,6}, {7,8,9}};
+System.out.println("\nMatrix:");
+for (int i = 0; i < matrix.length; i++) {
+    for (int j = 0; j < matrix[i].length; j++) {
+        System.out.print(matrix[i][j] + " ");
+    }
+    System.out.println();
+}
+
+// 3D Array
+int[][][] cube = {
+    {{1,2},{3,4}},
+    {{5,6},{7,8}}
+};
+System.out.println("\n3D Cube:");
+for (int i = 0; i < cube.length; i++) {
+    for (int j = 0; j < cube[i].length; j++) {
+        for (int k = 0; k < cube[i][j].length; k++) {
+            System.out.print(cube[i][j][k] + " ");
+        }
+        System.out.print("| ");
+    }
+    System.out.println();
+}
+
+// Dynamic Array using ArrayList
+import java.util.ArrayList;
+ArrayList<String> list = new ArrayList<>();
+list.add("Red");
+list.add("Green");
+list.add("Blue");
+System.out.println("\nArrayList:");
+for (String color : list) {
+    System.out.println(color);
+}
+    </div>
+
+    <div class="right">
+      <div class="explanation">
+        <strong>Explanation</strong>
+        <ul>
+          <li>1D array: simple list accessed by index.</li>
+          <li>2D array: rows & columns; access with <code>matrix[row][col]</code>.</li>
+          <li>3D array: cube-like structure; access with <code>cube[layer][row][col]</code>.</li>
+          <li>Dynamic arrays (ArrayList) can grow/shrink at runtime; use <code>add()</code> and loop via enhanced for.</li>
+          <li><code>length</code> for arrays, <code>size()</code> for ArrayList.</li>
+        </ul>
+        <small class="note">Compile & run as usual.</small>
+      </div>
+
+      <div class="output">
+Fruit 1: Apple
+Fruit 2: Banana
+Fruit 3: Mango
+
+Matrix:
+1 2 3
+4 5 6
+7 8 9
+
+3D Cube:
+1 2 | 3 4 | 
+5 6 | 7 8 | 
+
+ArrayList:
+Red
+Green
+Blue
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+      <!-- Methods -->
+      <section id="basics-methods" class="topic">
+        <h3>Methods (Functions)</h3>
+        <div class="panel">
+          <div class="code-block">
+public class MethodExample {
+    // method that adds two numbers and returns the result
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        int sum = add(4, 6); // call method
+        System.out.println("Sum: " + sum);
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Methods group reusable logic; declare return type and parameters.</li>
+                <li>Use <code>static</code> to call methods from <code>main</code> without instantiating a class.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Sum: 10
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================ Java OOP ================== -->
+
+      <!-- OOP: Classes & Objects -->
+      <section id="oop-classes" class="topic">
+        <h3>Classes & Objects</h3>
+        <div class="panel">
+          <div class="code-block">
+class Car {
+    String brand;
+    int year;
+
+    void displayInfo() {
+        System.out.println("Brand: " + brand + ", Year: " + year);
+    }
+}
+
+public class OOPClasses {
+    public static void main(String[] args) {
+        Car myCar = new Car();  // create object
+        myCar.brand = "Toyota";
+        myCar.year = 2022;
+        myCar.displayInfo();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>Car</code> is a class (blueprint); fields and methods define its state and behavior.</li>
+                <li><code>new Car()</code> creates an object in memory; <code>myCar</code> references it.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Brand: Toyota, Year: 2022
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Constructors -->
+      <section id="oop-constructors" class="topic">
+        <h3>Constructors</h3>
+        <div class="panel">
+          <div class="code-block">
+class Person {
+    String name;
+    int age;
+
+    // Constructor
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void info() {
+        System.out.println(name + " is " + age + " years old.");
+    }
+}
+
+public class OOPConstructor {
+    public static void main(String[] args) {
+        Person p = new Person("Alice", 20);
+        p.info();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Constructors initialize new objects; name matches the class and has no return type.</li>
+                <li><code>this</code> refers to the current object's fields.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Alice is 20 years old.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Encapsulation -->
+      <section id="oop-encapsulation" class="topic">
+        <h3>Encapsulation (Getters & Setters)</h3>
+        <div class="panel">
+          <div class="code-block">
+class Student {
+    private String name;  // hidden field
+
+    public void setName(String name) {
+        this.name = name; // setter
+    }
+    public String getName() {
+        return name;      // getter
+    }
+}
+
+public class OOPEncapsulation {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("Bob");
+        System.out.println(s.getName());
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Use <code>private</code> fields to protect direct access from outside classes.</li>
+                <li>Provide public getters/setters to control validation or access rules.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Bob
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inheritance -->
+      <section id="oop-inheritance" class="topic">
+        <h3>Inheritance</h3>
+        <div class="panel">
+          <div class="code-block">
+// Parent class
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Child class extends parent
+class Dog extends Animal {
+    // override sound
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class OOPInheritance {
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        Dog d = new Dog();
+        a.sound();
+        d.sound();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>extends</code> creates an "is-a" relationship; child inherits fields and methods.</li>
+                <li>Child can override behavior to provide a specific implementation.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Animal makes a sound
+Dog barks
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Method Overriding -->
+      <section id="oop-overriding" class="topic">
+        <h3>Method Overriding</h3>
+        <div class="panel">
+          <div class="code-block">
+class Parent {
+    void show() {
+        System.out.println("Parent show");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void show() {
+        System.out.println("Child show");
+    }
+}
+
+public class OOPOverride {
+    public static void main(String[] args) {
+        Parent p = new Child(); // reference type Parent, object type Child
+        p.show();               // calls Child's overridden method
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>When a subclass redefines a parent method with the same signature, that's overriding.</li>
+                <li>At runtime, the JVM calls the object's actual implementation (dynamic dispatch).</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Child show
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Polymorphism -->
+      <section id="oop-polymorphism" class="topic">
+        <h3>Polymorphism</h3>
+        <div class="panel">
+          <div class="code-block">
+// Polymorphism via inheritence and overridden methods
+class Shape {
+    void draw() { System.out.println("Draw shape"); }
+}
+
+class Circle extends Shape {
+    @Override
+    void draw() { System.out.println("Draw circle"); }
+}
+
+public class OOPPolymorphism {
+    public static void main(String[] args) {
+        Shape s = new Circle();
+        s.draw(); // Circle's draw runs
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Polymorphism allows treating subclass objects as superclass references.</li>
+                <li>Useful for writing flexible, extensible code (e.g., collections of Shape objects).</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Draw circle
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================ Advanced Java ================== -->
+
+      <!-- Thread extends Thread -->
+      <section id="adv-thread-class" class="topic">
+        <h3>Thread (extends Thread)</h3>
+        <div class="panel">
+          <div class="code-block">
+class MyThread extends Thread {
+    private String name;
+    MyThread(String name) { this.name = name; }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(name + " - count " + i);
+            try { Thread.sleep(200); } catch (InterruptedException e) { /* ignore */ }
+        }
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        Thread t1 = new MyThread("T1");
+        Thread t2 = new MyThread("T2");
+        t1.start(); // starts new thread that runs run()
+        t2.start();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Extending <code>Thread</code> lets you override <code>run()</code> to define thread work.</li>
+                <li>Call <code>start()</code> to create a new OS thread (or JVM-managed thread) — do not call <code>run()</code> directly.</li>
+                <li><code>Thread.sleep()</code> pauses the current thread.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+T1 - count 1
+T2 - count 1
+T1 - count 2
+T2 - count 2
+T1 - count 3
+T2 - count 3
+(Actual order may vary due to scheduling)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Runnable -->
+      <section id="adv-runnable" class="topic">
+        <h3>Runnable (implements Runnable)</h3>
+        <div class="panel">
+          <div class="code-block">
+class Worker implements Runnable {
+    private String name;
+    Worker(String name) { this.name = name; }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(name + " -> " + i);
+            try { Thread.sleep(200); } catch (InterruptedException e) { }
+        }
+    }
+}
+
+public class RunnableExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new Worker("W1"));
+        Thread t2 = new Thread(new Worker("W2"));
+        t1.start();
+        t2.start();
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>Implementing <code>Runnable</code> is preferred when the class needs to extend another class.</li>
+                <li>Pass the Runnable to a <code>Thread</code> and call <code>start()</code>.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+W1 -> 1
+W2 -> 1
+W1 -> 2
+W2 -> 2
+W1 -> 3
+W2 -> 3
+(Execution order may differ)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Synchronization -->
+      <section id="adv-sync" class="topic">
+        <h3>Synchronization (synchronized)</h3>
+        <div class="panel">
+          <div class="code-block">
+class Counter {
+    private int count = 0;
+    public synchronized void increment() {
+        count++;
+    }
+    public int get() { return count; }
+}
+
+public class SyncExample {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+        Thread t1 = new Thread(() -> { for(int i=0;i<1000;i++) c.increment(); });
+        Thread t2 = new Thread(() -> { for(int i=0;i<1000;i++) c.increment(); });
+        t1.start(); t2.start();
+        t1.join(); t2.join();
+        System.out.println("Count = " + c.get());
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>synchronized</code> ensures only one thread executes the method at a time for that object.</li>
+                <li>Without synchronization, concurrent increments may interleave and produce incorrect counts.</li>
+                <li>Use <code>join()</code> to wait for threads to finish before reading shared state.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Count = 2000
+(If unsynchronized, value may be less due to race conditions)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sleep & Join -->
+      <section id="adv-sleep-join" class="topic">
+        <h3>Sleep & Join</h3>
+        <div class="panel">
+          <div class="code-block">
+public class SleepJoinExample {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            try {
+                System.out.println("Worker sleeping...");
+                Thread.sleep(500); // pause worker
+                System.out.println("Worker done.");
+            } catch (InterruptedException e) { }
+        });
+
+        t.start();
+        System.out.println("Main waiting for worker to finish...");
+        t.join(); // wait until t finishes
+        System.out.println("Main continues.");
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li><code>Thread.sleep(ms)</code> pauses the current thread for a given time.</li>
+                <li><code>join()</code> blocks the calling thread until the target thread finishes.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Worker sleeping...
+Main waiting for worker to finish...
+Worker done.
+Main continues.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Simple Performance Tip -->
+      <section id="adv-performance" class="topic">
+        <h3>Simple Performance Tip (StringBuilder vs String concatenation)</h3>
+        <div class="panel">
+          <div class="code-block">
+public class PerfExample {
+    public static void main(String[] args) {
+        // Bad: repeated String concatenation in loop (creates many objects)
+        String s = "";
+        for (int i = 0; i < 1000; i++) {
+            s += i; // creates new String each time
+        }
+
+        // Better: use StringBuilder
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1000; i++) {
+            sb.append(i);
+        }
+        String result = sb.toString();
+        System.out.println("Length: " + result.length());
+    }
+}
+          </div>
+
+          <div class="right">
+            <div class="explanation">
+              <strong>Explanation</strong>
+              <ul>
+                <li>String in Java is immutable — repeated concatenation creates many intermediate objects.</li>
+                <li><code>StringBuilder</code> is mutable and more efficient for heavy string building.</li>
+              </ul>
+            </div>
+
+            <div class="output">
+Length: 2896
+(Actual length depends on concatenated numbers; demonstrates result produced)
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Sidebar click behavior
+    const links = document.querySelectorAll('.sidebar a[data-target]');
+    function clearActiveLinks() {
+      links.forEach(l => l.classList.remove('active'));
+    }
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = this.getAttribute('data-target');
+        if (!target) return;
+        // show topic
+        document.querySelectorAll('.topic').forEach(t => t.classList.remove('active'));
+        const el = document.getElementById(target);
+        if (el) el.classList.add('active');
+        // update active link styling
+        clearActiveLinks();
+        this.classList.add('active');
+        // scroll content to top for readability
+        document.querySelector('.content').scrollTop = 0;
+      });
+    });
+
+    // make first topic visible by default
+    (function() {
+      const first = document.querySelector('.sidebar a[data-target].active');
+      if (first) first.click();
+      else if (links.length) links[0].click();
+    })();
+  </script>
+</body>
+</html>

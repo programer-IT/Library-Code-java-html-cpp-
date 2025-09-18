@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C++ Tags / Keywords / Symbols Meaning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f5f5f5;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1 {
+      color: #222;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      background: #e8e8e8;
+      margin: 8px 0;
+      padding: 15px 12px;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.2s;
+      font-size: 1rem;
+    }
+    li:hover {
+      background: #d6d6d6;
+      transform: translateX(5px);
+    }
+    strong { color: #007bff; }
+    code { background: #f0f0f0; padding: 2px 5px; border-radius: 4px; }
+    
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+  </style>
+</head>
+<body>
+  <h1>C++ Tags / Keywords / Symbols Meaning  <a href="index.html">Back</a></h1>
+  <div class="container">
+    <ul>
+
+      <!-- Data Types -->
+      <li><strong>Data Types:</strong> int, float, double, char, bool, void, wchar_t — define variable and function return types.</li>
+
+      <!-- Literals -->
+      <li><strong>Literals:</strong> 0, 1, 2 … (integers), 3.14 (floating point), 'a' (character), "hello" (string), true, false, nullptr — constant values used in programs.</li>
+
+      <!-- Identifiers -->
+      <li><strong>Identifiers:</strong> Names like <code>main</code>, <code>myVar</code>, <code>counter</code> — user-defined names for variables, functions, classes.</li>
+
+      <!-- Control Flow -->
+      <li><strong>Control Flow:</strong> if, else, switch, case, default, for, while, do, break, continue, goto — manage decision-making and loops.</li>
+
+      <!-- Functions -->
+      <li><strong>Functions:</strong> return, void, inline, operator — define or return from functions.  
+        Example: <code>return 0;</code> exits a function (commonly <code>main</code>) and returns status to the OS.</li>
+
+      <!-- Operators -->
+      <li><strong>Arithmetic Operators:</strong> +, -, *, /, % — perform basic math operations.</li>
+      <li><strong>Relational Operators:</strong> ==, !=, &lt;, &gt;, &lt;=, &gt;= — compare values.</li>
+      <li><strong>Logical Operators:</strong> &&, ||, ! — logical AND, OR, NOT.</li>
+      <li><strong>Assignment Operators:</strong> =, +=, -=, *=, /=, %= — assign values to variables.</li>
+      <li><strong>Increment/Decrement:</strong> ++, -- — increase or decrease by one.</li>
+      <li><strong>Bitwise Operators:</strong> &, |, ^, ~, &lt;&lt;, &gt;&gt; — manipulate bits.</li>
+      <li><strong>Other Operators:</strong> sizeof, typeid, new, delete, alignof — memory and type operations.</li>
+
+      <!-- Punctuation -->
+      <li><strong>Semicolon ;</strong> — ends a statement (e.g., <code>int x = 5;</code>).</li>
+      <li><strong>Braces { }</strong> — group statements into blocks (used in functions, loops, if-else).</li>
+      <li><strong>Parentheses ( )</strong> — used for functions and expressions.</li>
+      <li><strong>Brackets [ ]</strong> — used for arrays and indexing.</li>
+      <li><strong>Comma ,</strong> — separates items in a list.</li>
+      <li><strong>Colon :</strong> — used in switch labels (<code>case 1:</code>), class inheritance (<code>class B : public A</code>).</li>
+      <li><strong>Scope Resolution Operator ::</strong> — defines scope (e.g., <code>std::cout</code>).</li>
+      <li><strong>Arrow Operators -&gt; and .</strong> — access members (pointer/object).</li>
+      <li><strong>Ternary Operator ?: </strong> — shorthand conditional (e.g., <code>x = (a &gt; b) ? a : b;</code>).</li>
+
+      <!-- Preprocessor -->
+      <li><strong>Preprocessor:</strong> #include, #define, #ifdef, #ifndef, #endif, #pragma — compiler instructions before compilation.</li>
+
+      <!-- OOP -->
+      <li><strong>OOP Keywords:</strong> class, struct, public, private, protected, friend, virtual, this — define and access object-oriented code.</li>
+
+      <!-- Memory -->
+      <li><strong>Memory Management:</strong> new, delete — dynamic allocation and deallocation.</li>
+
+      <!-- Templates -->
+      <li><strong>Templates:</strong> template, typename — generic programming.</li>
+
+      <!-- Exceptions -->
+      <li><strong>Exception Handling:</strong> try, catch, throw, noexcept — handle runtime errors.</li>
+    </ul>
+  </div>
+</body>
+</html>

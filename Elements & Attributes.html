@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML Forms & Inputs</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    h1 { margin: 0; }
+
+    .container { display: flex; height: 100vh; }
+    .sidebar {
+      width: 240px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .sidebar a:hover { background: #444; }
+
+    .content { flex: 1; padding: 20px; overflow-y: auto; }
+    .topic { display: none; }
+    .topic.active { display: flex; gap: 20px; flex-direction: column; }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    input, select, textarea, button {
+      margin: 5px 0;
+      padding: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HTML Forms & Inputs</h1>
+    <p>Learn HTML form elements step by step</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('text-input')">Text Input</a></li>
+        <li><a href="#" onclick="showTopic('password-input')">Password Input</a></li>
+        <li><a href="#" onclick="showTopic('checkbox-radio')">Checkbox & Radio</a></li>
+        <li><a href="#" onclick="showTopic('textarea')">Textarea</a></li>
+        <li><a href="#" onclick="showTopic('select')">Select / Dropdown</a></li>
+        <li><a href="#" onclick="showTopic('form-submit')">Form Submit</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Text Input -->
+      <div id="text-input" class="topic active">
+        <div class="code-block">
+<!-- Text Input Example -->
+&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input type="text" id="name" name="name" placeholder="Enter your name"&gt;
+        </div>
+        <div class="explanation">
+          <h3>Text Input</h3>
+          <p>&lt;input type="text"&gt; allows users to type a single line of text. The <code>placeholder</code> shows a hint inside the box.</p>
+          <div class="output">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div id="password-input" class="topic">
+        <div class="code-block">
+<!-- Password Input Example -->
+&lt;label for="pass"&gt;Password:&lt;/label&gt;
+&lt;input type="password" id="pass" name="pass" placeholder="Enter password"&gt;
+        </div>
+        <div class="explanation">
+          <h3>Password Input</h3>
+          <p>&lt;input type="password"&gt; hides the characters typed by the user for privacy.</p>
+          <div class="output">
+            <label for="pass">Password:</label><br>
+            <input type="password" id="pass" name="pass" placeholder="Enter password">
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkbox & Radio -->
+      <div id="checkbox-radio" class="topic">
+        <div class="code-block">
+<!-- Checkbox & Radio Example -->
+&lt;label&gt;&lt;input type="checkbox" name="subscribe"&gt; Subscribe to newsletter&lt;/label&gt;<br>
+&lt;label&gt;&lt;input type="radio" name="gender" value="male"&gt; Male&lt;/label&gt;<br>
+&lt;label&gt;&lt;input type="radio" name="gender" value="female"&gt; Female&lt;/label&gt;
+        </div>
+        <div class="explanation">
+          <h3>Checkbox & Radio</h3>
+          <p>Checkbox allows multiple selections. Radio allows only one option from a group.</p>
+          <div class="output">
+            <label><input type="checkbox" name="subscribe"> Subscribe to newsletter</label><br>
+            <label><input type="radio" name="gender" value="male"> Male</label><br>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div id="textarea" class="topic">
+        <div class="code-block">
+<!-- Textarea Example -->
+&lt;label for="message"&gt;Message:&lt;/label&gt;<br>
+&lt;textarea id="message" name="message" rows="4" cols="40"&gt;Enter your message here&lt;/textarea&gt;
+        </div>
+        <div class="explanation">
+          <h3>Textarea</h3>
+          <p>&lt;textarea&gt; allows multiple lines of text input. You can set rows and columns to adjust size.</p>
+          <div class="output">
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="40">Enter your message here</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Select / Dropdown -->
+      <div id="select" class="topic">
+        <div class="code-block">
+<!-- Select / Dropdown Example -->
+&lt;label for="country"&gt;Country:&lt;/label&gt;
+&lt;select id="country" name="country"&gt;
+  &lt;option value="ph"&gt;Philippines&lt;/option&gt;
+  &lt;option value="us"&gt;USA&lt;/option&gt;
+  &lt;option value="jp"&gt;Japan&lt;/option&gt;
+&lt;/select&gt;
+        </div>
+        <div class="explanation">
+          <h3>Select / Dropdown</h3>
+          <p>&lt;select&gt; creates a dropdown list. Each &lt;option&gt; is a choice.</p>
+          <div class="output">
+            <label for="country">Country:</label><br>
+            <select id="country" name="country">
+              <option value="ph">Philippines</option>
+              <option value="us">USA</option>
+              <option value="jp">Japan</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Submit -->
+      <div id="form-submit" class="topic">
+        <div class="code-block">
+<!-- Form Submit Example -->
+&lt;form action="#" method="post"&gt;
+  &lt;label for="email"&gt;Email:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" placeholder="Enter your email"&gt;<br>
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+        </div>
+        <div class="explanation">
+          <h3>Form Submit</h3>
+          <p>&lt;form&gt; groups input elements. <code>action</code> specifies where data is sent. <code>method</code> is usually GET or POST.</p>
+          <div class="output">
+            <form action="#" method="post">
+              <label for="email">Email:</label><br>
+              <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

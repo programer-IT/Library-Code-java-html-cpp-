@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Java OOP — Classes, Objects, Inheritance</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    h1 { margin: 0; }
+
+    .container { display: flex; height: 100vh; flex-wrap: wrap; }
+    .sidebar {
+      width: 220px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .sidebar a:hover { background: #444; }
+
+    .content { flex: 1; padding: 20px; overflow-y: auto; min-width: 0; }
+    .topic { display: none; }
+    .topic.active { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .code-block {
+      flex: 1 1 300px;
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      flex: 1 1 300px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    /* Tablets and smaller screens */
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Java OOP — Classes, Objects, Inheritance</h1>
+    <p>Learn OOP concepts step by step with examples</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('classes')">Classes & Objects</a></li>
+        <li><a href="#" onclick="showTopic('encapsulation')">Encapsulation</a></li>
+        <li><a href="#" onclick="showTopic('inheritance')">Inheritance</a></li>
+        <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Classes & Objects -->
+      <div id="classes" class="topic active">
+        <div class="code-block">
+class Car {
+    String brand;
+    int year;
+
+    void displayInfo() {
+        System.out.println("Brand: " + brand + ", Year: " + year);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.brand = "Toyota";
+        myCar.year = 2022;
+
+        myCar.displayInfo();
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Classes & Objects</h3>
+          <p><b>Class</b> = blueprint. <b>Object</b> = instance created from a class.</p>
+          <div class="output">
+Brand: Toyota, Year: 2022
+          </div>
+        </div>
+      </div>
+
+      <!-- Encapsulation -->
+      <div id="encapsulation" class="topic">
+        <div class="code-block">
+class Student {
+    private String name;
+
+    public void setName(String n) { name = n; }
+    public String getName() { return name; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("Alice");
+        System.out.println(s.getName());
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Encapsulation</h3>
+          <p>Encapsulation hides data using <code>private</code> variables; access through getters and setters.</p>
+          <div class="output">
+Alice
+          </div>
+        </div>
+      </div>
+
+      <!-- Inheritance -->
+      <div id="inheritance" class="topic">
+        <div class="code-block">
+class Animal {
+    void sound() { System.out.println("Animal makes a sound"); }
+}
+
+class Dog extends Animal {
+    void sound() { System.out.println("Dog barks"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        Dog d = new Dog();
+
+        a.sound();
+        d.sound();
+    }
+}
+        </div>
+        <div class="explanation">
+          <h3>Inheritance</h3>
+          <p>Child class <b>extends</b> parent class and can override methods.</p>
+          <div class="output">
+Animal makes a sound<br>
+Dog barks
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern C++ — STL & Smart Pointers</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    h1 { margin: 0; }
+
+    .container { display: flex; height: 100vh; }
+    .sidebar {
+      width: 250px;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .sidebar h2 { font-size: 18px; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar li { margin: 10px 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .sidebar a:hover { background: #444; }
+
+    .content { flex: 1; padding: 20px; overflow-y: auto; }
+    .topic { display: none; }
+    .topic.active { display: flex; gap: 20px; }
+
+    .code-block {
+      flex: 1;
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .explanation {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .output {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Modern C++ — STL & Smart Pointers</h1>
+    <p>Learn core features of Modern C++ with examples</p>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <ul>
+        <li><a href="#" onclick="showTopic('vector')">STL: Vector</a></li>
+        <li><a href="#" onclick="showTopic('list')">STL: List</a></li>
+        <li><a href="#" onclick="showTopic('set')">STL: Set</a></li>
+        <li><a href="#" onclick="showTopic('map')">STL: Map</a></li>
+        <li><a href="#" onclick="showTopic('iterator')">STL: Iterators</a></li>
+        <li><a href="#" onclick="showTopic('algorithm')">STL: Algorithm</a></li>
+        <li><a href="#" onclick="showTopic('unique_ptr')">Smart Pointer: unique_ptr</a></li>
+        <li><a href="#" onclick="showTopic('shared_ptr')">Smart Pointer: shared_ptr</a></li>
+        <li><a href="#" onclick="showTopic('weak_ptr')">Smart Pointer: weak_ptr</a></li>
+                <li><a href="index.html">Back To Home</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+      <!-- Vector -->
+      <div id="vector" class="topic active">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    // Vector is a dynamic array
+    vector&lt;int&gt; numbers = {1, 2, 3};
+
+    // Adding elements
+    numbers.push_back(4);
+
+    // Iterating with range-based for loop
+    for (int n : numbers) {
+        cout &lt;&lt; n &lt;&lt; " ";
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL Vector</h3>
+          <p><code>vector</code> is a resizable array in C++.<br>
+          - <code>push_back()</code> adds elements.<br>
+          - Works like an array but size can grow dynamically.</p>
+          <div class="output">
+1 2 3 4
+          </div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div id="list" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+
+int main() {
+    // List is a doubly linked list
+    list&lt;string&gt; fruits = {"Apple", "Banana"};
+
+    // Adding elements at both ends
+    fruits.push_front("Mango");
+    fruits.push_back("Orange");
+
+    // Iterating
+    for (const auto &f : fruits) {
+        cout &lt;&lt; f &lt;&lt; " ";
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL List</h3>
+          <p><code>list</code> is a doubly linked list.<br>
+          - <code>push_front()</code> inserts at the beginning.<br>
+          - <code>push_back()</code> inserts at the end.<br>
+          - Efficient for insertion/removal anywhere.</p>
+          <div class="output">
+Mango Apple Banana Orange
+          </div>
+        </div>
+      </div>
+
+      <!-- Set -->
+      <div id="set" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+using namespace std;
+
+int main() {
+    // Set stores unique sorted elements
+    set&lt;int&gt; numbers = {4, 2, 1, 3, 2};
+
+    for (int n : numbers) {
+        cout &lt;&lt; n &lt;&lt; " ";
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL Set</h3>
+          <p><code>set</code> stores only unique values in sorted order.<br>
+          - Duplicates are automatically removed.<br>
+          - Useful for fast searching and uniqueness.</p>
+          <div class="output">
+1 2 3 4
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div id="map" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+
+int main() {
+    // Map stores key-value pairs
+    map&lt;string, int&gt; age;
+
+    age["Alice"] = 20;
+    age["Bob"] = 25;
+
+    // Access by key
+    cout &lt;&lt; "Alice is " &lt;&lt; age["Alice"] &lt;&lt; " years old." &lt;&lt; endl;
+
+    // Iterating
+    for (auto &p : age) {
+        cout &lt;&lt; p.first &lt;&lt; " : " &lt;&lt; p.second &lt;&lt; endl;
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL Map</h3>
+          <p><code>map</code> stores data in key-value pairs.<br>
+          - Keys are unique.<br>
+          - Values are accessed using the key.<br>
+          - Internally uses a balanced binary tree.</p>
+          <div class="output">
+Alice is 20 years old.<br>
+Alice : 20<br>
+Bob : 25
+          </div>
+        </div>
+      </div>
+
+      <!-- Iterators -->
+      <div id="iterator" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; nums = {10, 20, 30};
+
+    // Using iterator
+    vector&lt;int&gt;::iterator it;
+    for (it = nums.begin(); it != nums.end(); ++it) {
+        cout &lt;&lt; *it &lt;&lt; " ";
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL Iterators</h3>
+          <p><code>iterator</code> acts like a pointer for containers.<br>
+          - <code>begin()</code> points to the first element.<br>
+          - <code>end()</code> points after the last element.<br>
+          - <code>*it</code> gives the value the iterator points to.</p>
+          <div class="output">
+10 20 30
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithm -->
+      <div id="algorithm" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; nums = {5, 2, 8, 1};
+
+    // Sort the vector
+    sort(nums.begin(), nums.end());
+
+    // Find element
+    if (binary_search(nums.begin(), nums.end(), 5)) {
+        cout &lt;&lt; "5 found!" &lt;&lt; endl;
+    }
+
+    for (int n : nums) {
+        cout &lt;&lt; n &lt;&lt; " ";
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>STL Algorithms</h3>
+          <p><code>algorithm</code> library provides ready-to-use functions.<br>
+          - <code>sort()</code> sorts the elements.<br>
+          - <code>binary_search()</code> searches efficiently in sorted containers.</p>
+          <div class="output">
+5 found!<br>
+1 2 5 8
+          </div>
+        </div>
+      </div>
+
+      <!-- unique_ptr -->
+      <div id="unique_ptr" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    // unique_ptr: owns an object exclusively
+    unique_ptr&lt;int&gt; ptr = make_unique&lt;int&gt;(10);
+
+    cout &lt;&lt; "Value: " &lt;&lt; *ptr &lt;&lt; endl;
+
+    // Can't copy, only move ownership
+    unique_ptr&lt;int&gt; ptr2 = move(ptr);
+
+    if (!ptr) cout &lt;&lt; "ptr is now empty" &lt;&lt; endl;
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>unique_ptr</h3>
+          <p><code>unique_ptr</code> manages a single object.<br>
+          - Only one owner at a time.<br>
+          - Automatically deletes memory when owner goes out of scope.</p>
+          <div class="output">
+Value: 10<br>
+ptr is now empty
+          </div>
+        </div>
+      </div>
+
+      <!-- shared_ptr -->
+      <div id="shared_ptr" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    // shared_ptr: multiple owners
+    shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(42);
+    shared_ptr&lt;int&gt; p2 = p1; // share ownership
+
+    cout &lt;&lt; "p1: " &lt;&lt; *p1 &lt;&lt; ", p2: " &lt;&lt; *p2 &lt;&lt; endl;
+    cout &lt;&lt; "Reference count: " &lt;&lt; p1.use_count() &lt;&lt; endl;
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>shared_ptr</h3>
+          <p><code>shared_ptr</code> allows multiple smart pointers to share ownership.<br>
+          - Keeps a reference counter.<br>
+          - Deletes object when the last owner is gone.</p>
+          <div class="output">
+p1: 42, p2: 42<br>
+Reference count: 2
+          </div>
+        </div>
+      </div>
+
+      <!-- weak_ptr -->
+      <div id="weak_ptr" class="topic">
+        <div class="code-block">
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    shared_ptr&lt;int&gt; sp = make_shared&lt;int&gt;(100);
+    weak_ptr&lt;int&gt; wp = sp; // weak reference
+
+    cout &lt;&lt; "Shared value: " &lt;&lt; *sp &lt;&lt; endl;
+    cout &lt;&lt; "Use count: " &lt;&lt; sp.use_count() &lt;&lt; endl;
+
+    // weak_ptr needs lock() to access
+    if (auto temp = wp.lock()) {
+        cout &lt;&lt; "Weak pointer locked: " &lt;&lt; *temp &lt;&lt; endl;
+    }
+    return 0;
+}
+        </div>
+        <div class="explanation">
+          <h3>weak_ptr</h3>
+          <p><code>weak_ptr</code> is a non-owning reference to <code>shared_ptr</code> object.<br>
+          - Prevents circular references.<br>
+          - Use <code>lock()</code> to safely access the object.</p>
+          <div class="output">
+Shared value: 100<br>
+Use count: 1<br>
+Weak pointer locked: 100
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTopic(id) {
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => topic.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All HTML Tags / Elements Meaning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f5f5f5;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #222;
+    }
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #007bff;
+      font-size: 1.3rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      background: #f0f0f0;
+      margin: 6px 0;
+      padding: 10px 12px;
+      border-radius: 6px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    li:hover {
+      background: #e0e0e0;
+      transform: translateX(4px);
+    }
+    strong { color: #007bff; }
+    @media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .topic.active {
+    flex-direction: column;
+  }
+  .code-block, .explanation, .output, .right {
+    width: 100% !important;
+  }
+}
+
+/* Mobile screens (≤ 600px) */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  header p { font-size: 0.8rem; }
+  .sidebar h2 { font-size: 1rem; }
+  .sidebar a { font-size: 0.9rem; padding: 6px; }
+  .code-block, .explanation, .output {
+    font-size: 13px;
+    padding: 10px;
+  }
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small devices (≤ 400px) */
+@media (max-width: 400px) {
+  .container { padding: 10px; margin: 10px; }
+  header h1 { font-size: 1.1rem; }
+  header p { font-size: 0.75rem; }
+  .sidebar a { font-size: 0.85rem; }
+  li { padding: 8px; }
+}
+  </style>
+</head>
+<body>
+  <h1>All HTML Tags / Elements Meaning</h1>
+  <div class="container">
+
+    <h2>Document Metadata <a href="index.html">Back</a></h2>
+    <ul>
+      <li><strong>&lt;!DOCTYPE&gt;</strong> — Defines the document type.</li>
+      <li><strong>&lt;html&gt;</strong> — Root element of HTML page.</li>
+      <li><strong>&lt;head&gt;</strong> — Container for metadata.</li>
+      <li><strong>&lt;title&gt;</strong> — Defines title in browser tab.</li>
+      <li><strong>&lt;base&gt;</strong> — Sets default URL/base for relative links.</li>
+      <li><strong>&lt;link&gt;</strong> — Links external resources (CSS, icons).</li>
+      <li><strong>&lt;meta&gt;</strong> — Metadata (charset, viewport, SEO).</li>
+      <li><strong>&lt;style&gt;</strong> — Internal CSS.</li>
+      <li><strong>&lt;script&gt;</strong> — JavaScript code or external script.</li>
+      <li><strong>&lt;noscript&gt;</strong> — Content if JS is disabled.</li>
+      <li><strong>&lt;template&gt;</strong> — Client-side content not rendered.</li>
+    </ul>
+
+    <h2>Sections & Structure</h2>
+    <ul>
+      <li><strong>&lt;body&gt;</strong> — Page content container.</li>
+      <li><strong>&lt;header&gt;</strong> — Intro or navigation for a page/section.</li>
+      <li><strong>&lt;nav&gt;</strong> — Navigation links.</li>
+      <li><strong>&lt;main&gt;</strong> — Main unique content.</li>
+      <li><strong>&lt;section&gt;</strong> — Thematic grouping of content.</li>
+      <li><strong>&lt;article&gt;</strong> — Independent content (blog post, news).</li>
+      <li><strong>&lt;aside&gt;</strong> — Sidebar/related content.</li>
+      <li><strong>&lt;footer&gt;</strong> — Footer information.</li>
+      <li><strong>&lt;address&gt;</strong> — Contact info.</li>
+      <li><strong>&lt;h1&gt;...&lt;h6&gt;</strong> — Headings, from most to least important.</li>
+      <li><strong>&lt;p&gt;</strong> — Paragraph.</li>
+      <li><strong>&lt;hr&gt;</strong> — Horizontal line (section break).</li>
+    </ul>
+
+    <h2>Text & Inline Elements</h2>
+    <ul>
+      <li><strong>&lt;a&gt;</strong> — Hyperlink.</li>
+      <li><strong>&lt;abbr&gt;</strong> — Abbreviation or acronym.</li>
+      <li><strong>&lt;b&gt;</strong> — Bold text (without extra importance).</li>
+      <li><strong>&lt;strong&gt;</strong> — Strong importance (bold, semantic).</li>
+      <li><strong>&lt;i&gt;</strong> — Italic text (no emphasis).</li>
+      <li><strong>&lt;em&gt;</strong> — Emphasized text (semantic italics).</li>
+      <li><strong>&lt;mark&gt;</strong> — Highlighted text.</li>
+      <li><strong>&lt;small&gt;</strong> — Smaller text (fine print).</li>
+      <li><strong>&lt;span&gt;</strong> — Inline container for styling.</li>
+      <li><strong>&lt;br&gt;</strong> — Line break.</li>
+      <li><strong>&lt;wbr&gt;</strong> — Word break opportunity.</li>
+      <li><strong>&lt;sub&gt;</strong> — Subscript text.</li>
+      <li><strong>&lt;sup&gt;</strong> — Superscript text.</li>
+      <li><strong>&lt;code&gt;</strong> — Inline code.</li>
+      <li><strong>&lt;kbd&gt;</strong> — Keyboard input.</li>
+      <li><strong>&lt;samp&gt;</strong> — Sample output.</li>
+      <li><strong>&lt;var&gt;</strong> — Variable in programming/math.</li>
+      <li><strong>&lt;q&gt;</strong> — Short quotation.</li>
+      <li><strong>&lt;blockquote&gt;</strong> — Long quotation.</li>
+      <li><strong>&lt;cite&gt;</strong> — Reference to a source.</li>
+      <li><strong>&lt;del&gt;</strong> — Deleted text (strike through).</li>
+      <li><strong>&lt;ins&gt;</strong> — Inserted/added text.</li>
+      <li><strong>&lt;s&gt;</strong> — Strikethrough (no longer relevant).</li>
+      <li><strong>&lt;u&gt;</strong> — Underlined text.</li>
+      <li><strong>&lt;bdi&gt;</strong> — Bi-directional isolation.</li>
+      <li><strong>&lt;bdo&gt;</strong> — Bi-directional text override.</li>
+    </ul>
+
+    <h2>Lists</h2>
+    <ul>
+      <li><strong>&lt;ul&gt;</strong> — Unordered list.</li>
+      <li><strong>&lt;ol&gt;</strong> — Ordered list.</li>
+      <li><strong>&lt;li&gt;</strong> — List item.</li>
+      <li><strong>&lt;dl&gt;</strong> — Description list.</li>
+      <li><strong>&lt;dt&gt;</strong> — Term in a description list.</li>
+      <li><strong>&lt;dd&gt;</strong> — Description of the term.</li>
+    </ul>
+
+    <h2>Tables</h2>
+    <ul>
+      <li><strong>&lt;table&gt;</strong> — Table container.</li>
+      <li><strong>&lt;caption&gt;</strong> — Table title/caption.</li>
+      <li><strong>&lt;tr&gt;</strong> — Table row.</li>
+      <li><strong>&lt;td&gt;</strong> — Table cell.</li>
+      <li><strong>&lt;th&gt;</strong> — Table header cell.</li>
+      <li><strong>&lt;thead&gt;</strong> — Table head section.</li>
+      <li><strong>&lt;tbody&gt;</strong> — Table body section.</li>
+      <li><strong>&lt;tfoot&gt;</strong> — Table footer section.</li>
+      <li><strong>&lt;col&gt;</strong> — Defines column properties.</li>
+      <li><strong>&lt;colgroup&gt;</strong> — Groups table columns.</li>
+    </ul>
+
+    <h2>Forms & Input</h2>
+    <ul>
+      <li><strong>&lt;form&gt;</strong> — Input form.</li>
+      <li><strong>&lt;input&gt;</strong> — Input field.</li>
+      <li><strong>&lt;textarea&gt;</strong> — Multiline text input.</li>
+      <li><strong>&lt;button&gt;</strong> — Clickable button.</li>
+      <li><strong>&lt;select&gt;</strong> — Dropdown list.</li>
+      <li><strong>&lt;option&gt;</strong> — Option in a dropdown.</li>
+      <li><strong>&lt;optgroup&gt;</strong> — Group of options.</li>
+      <li><strong>&lt;label&gt;</strong> — Label for form control.</li>
+      <li><strong>&lt;fieldset&gt;</strong> — Groups related inputs.</li>
+      <li><strong>&lt;legend&gt;</strong> — Caption for fieldset.</li>
+      <li><strong>&lt;datalist&gt;</strong> — List of pre-defined input options.</li>
+      <li><strong>&lt;output&gt;</strong> — Calculation/result output.</li>
+      <li><strong>&lt;progress&gt;</strong> — Progress indicator.</li>
+      <li><strong>&lt;meter&gt;</strong> — Scalar measurement (like a gauge).</li>
+    </ul>
+
+    <h2>Media</h2>
+    <ul>
+      <li><strong>&lt;img&gt;</strong> — Image.</li>
+      <li><strong>&lt;audio&gt;</strong> — Audio content.</li>
+      <li><strong>&lt;video&gt;</strong> — Video content.</li>
+      <li><strong>&lt;track&gt;</strong> — Subtitles/captions for video/audio.</li>
+      <li><strong>&lt;map&gt;</strong> — Image map.</li>
+      <li><strong>&lt;area&gt;</strong> — Clickable area in image map.</li>
+      <li><strong>&lt;canvas&gt;</strong> — Drawing graphics with JS.</li>
+      <li><strong>&lt;svg&gt;</strong> — Scalable Vector Graphics.</li>
+      <li><strong>&lt;iframe&gt;</strong> — Inline frame (embed another page).</li>
+      <li><strong>&lt;embed&gt;</strong> — Embeds external application/media.</li>
+      <li><strong>&lt;object&gt;</strong> — Embeds objects.</li>
+      <li><strong>&lt;param&gt;</strong> — Parameters for &lt;object&gt;.</li>
+      <li><strong>&lt;picture&gt;</strong> — Responsive images.</li>
+      <li><strong>&lt;source&gt;</strong> — Media resource for &lt;audio&gt;/&lt;video&gt;.</li>
+    </ul>
+
+  </div>
+</body>
+</html>
